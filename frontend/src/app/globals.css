@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media print {
+  @page {
+    margin: 1in;
+  }
+
+  body {
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+  }
+
+  /* Hide the form sidebar and preview toolbar on print */
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* Allow the layout to grow beyond one screen height */
+  body,
+  #__next,
+  .flex.h-screen {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  main {
+    overflow: visible !important;
+  }
+}
