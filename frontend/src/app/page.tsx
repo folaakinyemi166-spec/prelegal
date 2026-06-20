@@ -9,7 +9,7 @@ export default function Home() {
   const [data, setData] = useState<NDAFormData>(defaultFormData);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gray-50">
+    <div className="flex h-screen overflow-hidden bg-gray-50 print:h-auto print:overflow-visible">
       {/* Form panel — hidden on print */}
       <aside className="print:hidden w-96 min-w-80 border-r border-gray-200 bg-white flex flex-col">
         <header className="px-5 py-4 border-b border-gray-200 flex-shrink-0">
@@ -33,7 +33,7 @@ export default function Home() {
       </aside>
 
       {/* Preview panel */}
-      <main className="flex-1 overflow-y-auto bg-white">
+      <main className="flex-1 overflow-y-auto bg-white print:overflow-visible">
         <div className="print:hidden px-6 py-3 border-b border-gray-200 bg-gray-50">
           <span className="text-xs text-gray-500">Live preview — updates as you type</span>
         </div>

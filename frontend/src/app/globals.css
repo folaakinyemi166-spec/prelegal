@@ -40,4 +40,16 @@ body {
   .print\:hidden {
     display: none !important;
   }
+
+  /* Allow the layout to grow beyond one screen height */
+  body,
+  #__next,
+  .flex.h-screen {
+    height: auto !important;
+    overflow: visible !important;
+  }
+
+  main {
+    overflow: visible !important;
+  }
 }
