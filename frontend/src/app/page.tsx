@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { NDAForm } from "@/components/NDAForm";
+import { NDAChat } from "@/components/NDAChat";
 import { NDAPreview } from "@/components/NDAPreview";
 import { defaultFormData, NDAFormData } from "@/lib/nda-types";
 
@@ -14,10 +14,10 @@ export default function Home() {
       <aside className="print:hidden w-96 min-w-80 border-r border-gray-200 bg-white flex flex-col">
         <header className="px-5 py-4 border-b border-gray-200 flex-shrink-0">
           <h1 className="text-lg font-bold text-gray-900">Mutual NDA Generator</h1>
-          <p className="text-xs text-gray-500 mt-0.5">Fill in the details to generate your agreement</p>
+          <p className="text-xs text-gray-500 mt-0.5">Chat with AI to generate your agreement</p>
         </header>
-        <div className="flex-1 overflow-y-auto px-5 py-4">
-          <NDAForm data={data} onChange={setData} />
+        <div className="flex-1 overflow-hidden flex flex-col">
+          <NDAChat data={data} onChange={setData} />
         </div>
         <div className="px-5 py-4 border-t border-gray-200 flex-shrink-0">
           <button

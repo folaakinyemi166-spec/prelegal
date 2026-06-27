@@ -7,6 +7,7 @@ from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
 from .auth import router as auth_router
+from .chat import router as chat_router
 from .db import init_db
 
 STATIC_DIR = Path(__file__).parent.parent / "static"
@@ -29,6 +30,7 @@ app.add_middleware(
 )
 
 app.include_router(auth_router)
+app.include_router(chat_router)
 
 
 @app.get("/api/health")
