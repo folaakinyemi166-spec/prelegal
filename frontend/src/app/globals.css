@@ -3,6 +3,13 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Brand palette */
+  --color-accent:    #ecad0a;
+  --color-primary:   #209dd7;
+  --color-secondary: #753991;
+  --color-navy:      #032147;
+  --color-gray:      #888888;
 }
 
 @theme inline {
@@ -10,6 +17,13 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  /* Expose brand palette as Tailwind utilities */
+  --color-brand-accent:    var(--color-accent);
+  --color-brand-primary:   var(--color-primary);
+  --color-brand-secondary: var(--color-secondary);
+  --color-brand-navy:      var(--color-navy);
+  --color-brand-gray:      var(--color-gray);
 }
 
 @media (prefers-color-scheme: dark) {

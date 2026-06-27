@@ -22,7 +22,7 @@ export default function Home() {
         <div className="px-5 py-4 border-t border-gray-200 flex-shrink-0">
           <button
             onClick={() => window.print()}
-            className="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-medium py-2.5 px-4 rounded-lg text-sm transition-colors"
+            className="w-full bg-brand-secondary text-white font-medium py-2.5 px-4 rounded-lg text-sm transition-colors"
           >
             Download PDF
           </button>
