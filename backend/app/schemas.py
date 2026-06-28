@@ -18,40 +18,7 @@ class UserResponse(BaseModel):
     email: str
 
 
-# ── Chat / NDA extraction ────────────────────────────────────────────────────
-
-
-class NdaExtraction(BaseModel):
-    """Structured output returned by the AI for every chat turn.
-
-    assistant_reply is the conversational message shown to the user.
-    All NDA fields are Optional — null means "not yet mentioned".
-    """
-
-    assistant_reply: str
-
-    # Agreement parameters
-    purpose: Optional[str] = None
-    effective_date: Optional[str] = None          # YYYY-MM-DD
-    mnda_term_type: Optional[Literal["expires", "continues"]] = None
-    mnda_term_years: Optional[str] = None
-    confidentiality_term_type: Optional[Literal["years", "perpetuity"]] = None
-    confidentiality_term_years: Optional[str] = None
-    governing_law: Optional[str] = None
-    jurisdiction: Optional[str] = None
-    modifications: Optional[str] = None
-
-    # Party 1
-    party1_company: Optional[str] = None
-    party1_print_name: Optional[str] = None
-    party1_title: Optional[str] = None
-    party1_notice_address: Optional[str] = None
-
-    # Party 2
-    party2_company: Optional[str] = None
-    party2_print_name: Optional[str] = None
-    party2_title: Optional[str] = None
-    party2_notice_address: Optional[str] = None
+# ── Chat / document extraction ───────────────────────────────────────────────
 
 
 class ChatMessage(BaseModel):
@@ -62,12 +29,25 @@ class ChatMessage(BaseModel):
 class ChatMessageRequest(BaseModel):
     user_message: str
     history: list[ChatMessage] = []
+    doc_type: str = "Mutual-NDA"
 
 
 class ChatMessageResponse(BaseModel):
     assistant_reply: str
-    nda_fields: NdaExtraction
+    doc_fields: dict[str, Optional[str]]
 
 
 class GreetingResponse(BaseModel):
     message: str
+
+
+class FieldDefinition(BaseModel):
+    name: str
+    label: str
+    description: str
+
+
+class DocConfigResponse(BaseModel):
+    doc_type: str
+    title: str
+    fields: list[FieldDefinition]

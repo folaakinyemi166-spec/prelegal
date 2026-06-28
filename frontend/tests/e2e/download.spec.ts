@@ -1,10 +1,14 @@
 import { test, expect } from "@playwright/test";
 
+async function selectDocument(page: import("@playwright/test").Page, name: string) {
+  await page.goto("/");
+  await page.getByRole("button", { name: new RegExp(name) }).click();
+}
+
 test.describe("Download PDF button", () => {
   test("clicking Download PDF triggers window.print", async ({ page }) => {
-    await page.goto("/");
+    await selectDocument(page, "Mutual Non-Disclosure");
 
-    // Replace window.print with a no-op that records whether it was called.
     await page.evaluate(() => {
       (window as unknown as Record<string, unknown>).__printCalled__ = false;
       window.print = () => {
@@ -20,10 +24,15 @@ test.describe("Download PDF button", () => {
     expect(printCalled).toBe(true);
   });
 
-  test("Download PDF button is visible and enabled", async ({ page }) => {
-    await page.goto("/");
+  test("Download PDF button is visible and enabled after selecting a document", async ({ page }) => {
+    await selectDocument(page, "Mutual Non-Disclosure");
     const button = page.getByRole("button", { name: "Download PDF" });
     await expect(button).toBeVisible();
     await expect(button).toBeEnabled();
+  });
+
+  test("Download PDF button is not visible on catalog page", async ({ page }) => {
+    await page.goto("/");
+    await expect(page.getByRole("button", { name: "Download PDF" })).not.toBeVisible();
   });
 });
