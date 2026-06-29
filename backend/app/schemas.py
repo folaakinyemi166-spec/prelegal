@@ -51,3 +51,28 @@ class DocConfigResponse(BaseModel):
     doc_type: str
     title: str
     fields: list[FieldDefinition]
+
+
+# ── Document persistence ─────────────────────────────────────────────────────
+
+
+class DocumentCreate(BaseModel):
+    doc_type: str
+    doc_name: str
+    template_filename: str
+    fields: dict[str, Optional[str]] = {}
+
+
+class DocumentUpdate(BaseModel):
+    doc_name: Optional[str] = None
+    fields: dict[str, Optional[str]] = {}
+
+
+class DocumentResponse(BaseModel):
+    id: int
+    doc_type: str
+    doc_name: str
+    template_filename: str
+    fields: dict[str, Optional[str]]
+    created_at: str
+    updated_at: str
