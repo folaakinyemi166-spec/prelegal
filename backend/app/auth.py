@@ -78,6 +78,12 @@ def signout(response: Response):
     return {"message": "Signed out"}
 
 
+def get_current_user(auth_token: str | None = Cookie(default=None)) -> int:
+    if not auth_token:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Not authenticated")
+    return _verify_token(auth_token)
+
+
 @router.get("/me", response_model=UserResponse)
 def me(auth_token: str | None = Cookie(default=None)):
     if not auth_token:

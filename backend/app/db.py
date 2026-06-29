@@ -22,6 +22,16 @@ def init_db() -> None:
             password_hash TEXT    NOT NULL,
             created_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP
         );
+        CREATE TABLE IF NOT EXISTS documents (
+            id                INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id           INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+            doc_type          TEXT    NOT NULL,
+            doc_name          TEXT    NOT NULL,
+            template_filename TEXT    NOT NULL,
+            fields_json       TEXT    NOT NULL DEFAULT '{}',
+            created_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at        TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        );
     """)
     conn.commit()
     conn.close()

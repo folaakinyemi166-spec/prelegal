@@ -1,9 +1,5 @@
 import { test, expect } from "@playwright/test";
-
-async function selectDocument(page: import("@playwright/test").Page, name: string) {
-  await page.goto("/");
-  await page.getByRole("button", { name: new RegExp(name) }).click();
-}
+import { mockAuth, selectDocument } from "./helpers";
 
 test.describe("Download PDF button", () => {
   test("clicking Download PDF triggers window.print", async ({ page }) => {
@@ -32,6 +28,7 @@ test.describe("Download PDF button", () => {
   });
 
   test("Download PDF button is not visible on catalog page", async ({ page }) => {
+    await mockAuth(page);
     await page.goto("/");
     await expect(page.getByRole("button", { name: "Download PDF" })).not.toBeVisible();
   });

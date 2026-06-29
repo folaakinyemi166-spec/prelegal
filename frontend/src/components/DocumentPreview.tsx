@@ -43,6 +43,13 @@ export function DocumentPreview({ templateFilename, fields, fieldLabels }: Props
 
   return (
     <div id="document-preview" className="font-serif text-gray-900 text-sm leading-relaxed">
+      {/* Disclaimer */}
+      <div className="print:block mb-6 rounded-lg bg-amber-50 border border-amber-200 px-4 py-3 text-xs text-amber-800 leading-relaxed">
+        <strong>Draft document — for review purposes only.</strong> This agreement was generated with AI assistance
+        and has not been reviewed by an attorney. It should not be used as a final legal document without review
+        by a qualified legal professional.
+      </div>
+
       {/* Key Terms cover page */}
       <div className="mb-8">
         <h2 className="text-lg font-bold mb-1">Key Terms</h2>
@@ -74,7 +81,7 @@ export function DocumentPreview({ templateFilename, fields, fieldLabels }: Props
         <h2 className="text-lg font-bold mb-4">Standard Terms</h2>
 
         {templateContent ? (
-          <div className="prose prose-sm max-w-none text-gray-800 [&_span]:text-blue-800 [&_span]:font-medium">
+          <div data-testid="template-content" className="prose prose-sm max-w-none text-gray-800 [&_span]:text-blue-800 [&_span]:font-medium">
             <ReactMarkdown rehypePlugins={[rehypeRaw]}>{templateContent}</ReactMarkdown>
           </div>
         ) : templateError ? (
