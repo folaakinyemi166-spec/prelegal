@@ -4,7 +4,7 @@ This is a SaaS product to allow users to draft legal agreements based on templat
 
 @catalog.json
 
-The current implementation supports all 11 document types via AI chat with full user authentication and document persistence.
+The current implementation supports all 12 document types via AI chat with full user authentication and document persistence.
 
 Development process
 When instructed to build a feature:
@@ -67,6 +67,13 @@ Download button appears when all required fields are gathered
 
 AI always asks follow-on questions when more information is needed
 
+Completed (SCRUM-10)
+AI chat expanded to all 12 legal document types (previously NDA only)
+Document catalog served from catalog.json via GET /api/catalog
+Template files served via GET /api/templates/{filename}
+Document-specific field configs served via GET /api/chat/config
+AI extracts structured fields per document type using Structured Outputs
+
 Completed (SCRUM-11)
 Functional user authentication with JWT tokens in HttpOnly cookies
 User signup and signin with email/password (bcrypt password hashing)
@@ -87,6 +94,9 @@ POST /api/documents - Save new document (auth required)
 GET /api/documents/{id} - Get specific document (auth required)
 PUT /api/documents/{id} - Update document (auth required)
 DELETE /api/documents/{id} - Delete document (auth required)
-GET /api/chat/greeting - Get AI greeting
+GET /api/catalog - List all available document types
+GET /api/templates/{filename} - Fetch raw template file
+GET /api/chat/greeting - Get AI greeting for selected document type
+GET /api/chat/config - Get field config for selected document type
 POST /api/chat/message - Send chat message and get AI response
 GET /api/health - Health check
